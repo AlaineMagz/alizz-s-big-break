@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpobdsl18a17f"]
+
+[ext_resource type="Script" uid="uid://b3r6fdpbmdrio" path="res://Scripts/GameObjects/Floor.gd" id="1_j2gnx"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_j2gnx")
+objectType = null
+objectPos = null
+xBounds = null
+yBounds = null
+zBounds = null
+drawDebug = null
+debugColor = null
+debugOutlineColor = null
+debugOutlineWeight = null
+xOffset = null
+zOffset = null
+speed = null
+fallSpeed = null
+jumpPower = null
+isJumping = null
+isFalling = null
+yVelocity = null

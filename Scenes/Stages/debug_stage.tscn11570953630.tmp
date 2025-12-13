@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://nm5vfdrr2uch"]
+
+[ext_resource type="Script" uid="uid://kmi4gayto1cd" path="res://Scripts/FloorManager.gd" id="1_570f8"]
+[ext_resource type="Script" uid="uid://tmk1ghxkjxda" path="res://Scripts/PlayerManager.gd" id="1_bgp41"]
+[ext_resource type="Texture2D" uid="uid://di0gri06r424q" path="res://Art/icon.svg" id="2_bgp41"]
+[ext_resource type="Script" uid="uid://crpvf7n6tndtg" path="res://Scripts/LevelManager.gd" id="3_ndg24"]
+[ext_resource type="Script" uid="uid://b3r6fdpbmdrio" path="res://Scripts/Floor.gd" id="5_ycoyw"]
+
+[node name="DebugStage" type="Node2D"]
+
+[node name="Player" type="Node2D" parent="." node_paths=PackedStringArray("levelManager")]
+script = ExtResource("1_bgp41")
+levelManager = NodePath("../Level")
+playerPos = Vector3(-500, 0, 0)
+xBuffer = null
+zBuffer = null
+xOffset = null
+zOffset = null
+debugTexture = ExtResource("2_bgp41")
+speed = null
+fallSpeed = null
+jumpPower = null
+isJumping = null
+isFalling = null
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="Player"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Player/CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_bgp41")
+
+[node name="Camera2D" type="Camera2D" parent="Player/CharacterBody2D"]
+zoom = Vector2(0.75, 0.75)
+
+[node name="Level" type="Node2D" parent="." node_paths=PackedStringArray("floorManager")]
+script = ExtResource("3_ndg24")
+floorManager = NodePath("Floors")
+
+[node name="Floors" type="Node2D" parent="Level" node_paths=PackedStringArray("floorArr")]
+z_index = -1
+script = ExtResource("1_570f8")
+floorArr = [NodePath("MainFloor"), NodePath("SecondaryFloor")]
+
+[node name="MainFloor" type="Node2D" parent="Level/Floors"]
+script = ExtResource("5_ycoyw")
+xBounds = Vector2(-500, 500)
+zBounds = Vector2(-500, 500)
+drawDebug = true
+
+[node name="SecondaryFloor" type="Node2D" parent="Level/Floors"]
+script = ExtResource("5_ycoyw")
+xBounds = Vector2(500, 1000)
+yLevel = -300
+zBounds = Vector2(-500, 500)
+drawDebug = true
+
+[node name="Entities" type="Node2D" parent="."]

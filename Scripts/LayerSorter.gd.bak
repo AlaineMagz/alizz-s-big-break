@@ -1,0 +1,44 @@
+@tool
+extends Node2D
+
+@export var player: Node2D
+@export var level: Node2D
+@export var entities: Node2D
+
+var objectList : Dictionary = {}
+
+var objectNoFloorArr : Array[Node2D]
+var xArr : Array[Node2D]
+var yArr : Array[Node2D]
+var zArr : Array[Node2D]
+
+func _process(_delta):
+	
+	clearArrs()
+	
+	getObjectNoFloorArr()
+	getYArr()
+	
+
+func clearArrs():
+	
+	objectNoFloorArr.clear()
+	yArr.clear()
+	
+
+func getObjectNoFloorArr():
+	
+	objectNoFloorArr.append(player)
+	
+	for wl in level.wallManager.wallArr:
+		objectNoFloorArr.append(wl)
+	
+
+func getYArr():
+	
+	#Step 1 - Order all non-floors
+	while !objectNoFloorArr.is_empty():
+		
+		var max = null
+		
+	

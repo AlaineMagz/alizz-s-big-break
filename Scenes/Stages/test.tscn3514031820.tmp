@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpobdsl18a17f"]
+
+[ext_resource type="Script" uid="uid://b3r6fdpbmdrio" path="res://Scripts/Floor.gd" id="1_j2gnx"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_j2gnx")
+xBounds = Vector2(10, 0)
+zBounds = Vector2(10, 0)
