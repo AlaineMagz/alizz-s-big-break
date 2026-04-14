@@ -1,6 +1,7 @@
+@tool
 class_name GameObject extends Node2D
 
-enum ObjectTypes{ Floor, XWall, ZWall, Entity, Item, Area }
+enum ObjectTypes{ Geometry, Entity, Item, Area }
 
 @export var objectType: ObjectTypes
 
@@ -45,6 +46,36 @@ enum ObjectTypes{ Floor, XWall, ZWall, Entity, Item, Area }
 	set(value):
 		debugOutlineWeight = value
 		queue_redraw()
+
+func _process(_delta) -> void:
+	
+	if Engine.is_editor_hint():
+		calculate_2D_position()
+		queue_redraw()
+	
+
+func calculate_2D_position():
+	
+	position = Vector2(objectPos.x + (objectPos.z) / 2, -(objectPos.y + (objectPos.z / 2)))
+	
+
+func get_front_pos():
+	return objectPos.z + zBounds.x
+
+func get_back_pos():
+	return objectPos.z + zBounds.y
+
+func get_top_pos():
+	return objectPos.y + yBounds.y
+
+func get_bottom_pos():
+	return objectPos.y + yBounds.x
+
+func get_left_pos():
+	return objectPos.x + xBounds.x
+
+func get_right_pos():
+	return objectPos.x + xBounds.y
 
 #Draw Functions
 func getFrontFacePoints(xBound:Vector2, yBound:Vector2, zBound:Vector2):

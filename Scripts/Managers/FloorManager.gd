@@ -1,9 +1,11 @@
 @tool
 extends Node2D
+class_name floorManager
 
 @export var floorArr: Array[Node2D]
 
 func _process(_delta):
+	
 	
 	maintain_array()
 	

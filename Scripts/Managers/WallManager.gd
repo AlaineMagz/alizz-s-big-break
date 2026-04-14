@@ -1,5 +1,6 @@
 @tool
 extends Node2D
+class_name wallManager
 
 @export var wallArr: Array[Node2D]
 

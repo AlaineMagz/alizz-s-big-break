@@ -1,3 +1,4 @@
+@tool
 class_name Entity extends GameObject
 
 @export_group("Entity")
@@ -38,23 +39,24 @@ func handle_floor():
 	
 	var floorFound = false
 	
-	for fl in levelManager.floorManager.floorArr:
+	for fl : Geometry in levelManager.floorM.floorArr:
 		
 		var inBounds = false
 		var sameYLevel = false
 		
-		if fl.yLevel == objectPos.y + min(yBounds.x, yBounds.y):
+		if fl.get_top_pos() == get_bottom_pos():
 			sameYLevel = true
-		else: if objectPos.y + min(yBounds.x, yBounds.y) > fl.yLevel && ((objectPos.y + min(yBounds.x, yBounds.y)) - fl.yLevel) < fallSpeed:
-			objectPos.y = fl.yLevel
+		else: if get_bottom_pos() > fl.get_top_pos() && (get_bottom_pos() - fl.get_top_pos()) < fallSpeed:
+			objectPos.y = fl.get_top_pos() - yBounds.x
 			sameYLevel = true
 		
-		if (objectPos.x + max(xBounds.x, xBounds.y) > fl.xBounds.x && objectPos.x + min(xBounds.x, xBounds.y) < fl.xBounds.y) && (objectPos.z + max(zBounds.x, zBounds.y) > fl.zBounds.x && objectPos.z + min(zBounds.x, zBounds.y) < fl.zBounds.y):
+		if (get_right_pos() > fl.get_left_pos() && get_left_pos() < fl.get_right_pos()) && (get_back_pos() > fl.get_front_pos() && get_front_pos() < fl.get_back_pos()):
 			inBounds = true
 		
 		if inBounds && sameYLevel:
 			currentFloor = fl
 			floorFound = true
+			print(fl.name)
 		
 	
 	if !floorFound:
@@ -90,6 +92,14 @@ func handle_vertical(delta):
 		objectPos.y -= fallSpeed
 	
 
-func calculate_2D_position():
+func _draw():
 	
-	position = Vector2(objectPos.x + (objectPos.z) / 2, -(objectPos.y + (objectPos.z / 2)))
+	if drawDebug:
+		draw_colored_polygon(getTopFacePoints(xBounds,yBounds,zBounds), debugColor)
+		draw_polyline(getTopFaceBorderPoints(xBounds,yBounds,zBounds), debugOutlineColor, debugOutlineWeight)
+		
+		draw_colored_polygon(getFrontFacePoints(xBounds,yBounds,zBounds), debugColor)
+		draw_polyline(getFrontFaceBorderPoints(xBounds,yBounds,zBounds), debugOutlineColor, debugOutlineWeight)
+		
+		draw_colored_polygon(getSideFacePoints(xBounds,yBounds,zBounds), debugColor)
+		draw_polyline(getSideFaceBorderPoints(xBounds,yBounds,zBounds), debugOutlineColor, debugOutlineWeight)
