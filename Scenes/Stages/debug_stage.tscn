@@ -16,7 +16,7 @@ player = NodePath("../Player")
 level = NodePath("../Level")
 
 [node name="Player" type="Node2D" parent="." unique_id=357619179 node_paths=PackedStringArray("cb2d", "levelManager", "sprite")]
-z_index = 2048
+z_index = 2047
 position = Vector2(125, -50)
 script = ExtResource("1_bgp41")
 cb2d = NodePath("CharacterBody2D")
@@ -55,83 +55,83 @@ floorArr = [NodePath("FloorMain"), NodePath("FloorEastBasement"), NodePath("Floo
 z_index = 2045
 script = ExtResource("6_ctrck")
 xBounds = Vector2(-200, 200)
-yBounds = Vector2(-1, 1)
+yBounds = Vector2(0, 1)
 zBounds = Vector2(-200, 200)
 drawDebug = true
 debugColor = Color(0.20638901, 0.424793, 0.33014047, 1)
 
 [node name="FloorBasement" type="Node2D" parent="Level/Floors" unique_id=1610286398]
-z_index = 2038
+z_index = 2040
 position = Vector2(0, 300)
 script = ExtResource("6_ctrck")
 objectPos = Vector3(0, -300, 0)
 xBounds = Vector2(-200, 200)
-yBounds = Vector2(-1, 1)
+yBounds = Vector2(0, 1)
 zBounds = Vector2(-200, 200)
 drawDebug = true
 debugColor = Color(0.31257963, 0.47206515, 0.6501949, 1)
 
 [node name="FloorEastBasement" type="Node2D" parent="Level/Floors" unique_id=1794944108]
-z_index = 2039
+z_index = 2042
 position = Vector2(400, 300)
 script = ExtResource("6_ctrck")
 objectPos = Vector3(400, -300, 0)
 xBounds = Vector2(-200, 200)
-yBounds = Vector2(-1, 1)
+yBounds = Vector2(0, 1)
 zBounds = Vector2(-200, 200)
 drawDebug = true
 debugColor = Color(0.6539525, 0.11357746, 0.27632123, 1)
 
 [node name="FloorSouth" type="Node2D" parent="Level/Floors" unique_id=1018182847]
-z_index = 2046
+z_index = 2048
 position = Vector2(-200, 200)
 script = ExtResource("6_ctrck")
 objectPos = Vector3(0, 0, -400)
 xBounds = Vector2(-200, 200)
-yBounds = Vector2(-1, 1)
+yBounds = Vector2(0, 1)
 zBounds = Vector2(-200, 200)
 drawDebug = true
 debugColor = Color(0.42288277, 0.4228828, 0.4228828, 1)
 
 [node name="FloorWest" type="Node2D" parent="Level/Floors" unique_id=402176920]
-z_index = 2044
+z_index = 2043
 position = Vector2(-400, 0)
 script = ExtResource("6_ctrck")
 objectPos = Vector3(-400, 0, 0)
 xBounds = Vector2(-200, 200)
-yBounds = Vector2(-1, 1)
+yBounds = Vector2(0, 1)
 zBounds = Vector2(-200, 200)
 drawDebug = true
 debugColor = Color(0.9380429, 0.741285, 0, 1)
 
 [node name="FloorNorth" type="Node2D" parent="Level/Floors" unique_id=1512882068]
-z_index = 2041
+z_index = 2038
 position = Vector2(200, -200)
 script = ExtResource("6_ctrck")
 objectPos = Vector3(0, 0, 400)
 xBounds = Vector2(-200, 200)
-yBounds = Vector2(-1, 1)
+yBounds = Vector2(0, 1)
 zBounds = Vector2(-200, 200)
 drawDebug = true
 
 [node name="FloorNorthEast" type="Node2D" parent="Level/Floors" unique_id=626408439]
-z_index = 2042
+z_index = 2039
 position = Vector2(600, -200)
 script = ExtResource("6_ctrck")
 objectPos = Vector3(400, 0, 400)
 xBounds = Vector2(-200, 200)
-yBounds = Vector2(-1, 1)
+yBounds = Vector2(0, 1)
 zBounds = Vector2(-200, 200)
 drawDebug = true
 debugColor = Color(0.64186317, 0.34105295, 0.6337766, 1)
 
 [node name="FloorEast" type="Node2D" parent="Level/Floors" unique_id=1405063371]
-z_index = 2043
+z_index = 2046
 position = Vector2(400, 0)
 script = ExtResource("6_ctrck")
 objectPos = Vector3(400, 0, 0)
 xBounds = Vector2(-200, 200)
-yBounds = Vector2(-1, 1)
+yBounds = Vector2(0, 1)
 zBounds = Vector2(-25, 25)
 drawDebug = true
 
@@ -140,7 +140,7 @@ script = ExtResource("6_sjbvb")
 wallArr = [NodePath("Wall1"), NodePath("Wall2")]
 
 [node name="Wall1" type="Node2D" parent="Level/Walls" unique_id=1127661443]
-z_index = 2047
+z_index = 2044
 script = ExtResource("6_ctrck")
 xBounds = Vector2(-1, 1)
 yBounds = Vector2(0, 50)
@@ -148,10 +148,10 @@ zBounds = Vector2(-200, 200)
 drawDebug = true
 
 [node name="Wall2" type="Node2D" parent="Level/Walls" unique_id=1328136569]
-z_index = 2040
-position = Vector2(500, 50)
+z_index = 2041
+position = Vector2(400, 150)
 script = ExtResource("6_ctrck")
-objectPos = Vector3(400, -150, 200)
+objectPos = Vector3(400, -150, 0)
 xBounds = Vector2(-200, 200)
 yBounds = Vector2(-150, 150)
 zBounds = Vector2(-1, 1)

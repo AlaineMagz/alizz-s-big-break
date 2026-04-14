@@ -1,9 +1,2 @@
 res://Scenes/Stages/debug_stage.tscn
-res://Scripts/Managers/FloorManager.gd
-res://Scripts/Managers/WallManager.gd
-res://Scripts/Managers/LevelManager.gd
 res://Scripts/Managers/LayerSorter.gd
-res://Scripts/GameObjects/Entity.gd
-res://Scripts/GameObjects/GameObject.gd
-res://Scripts/GameObjects/Geometry.gd
-res://Scripts/PlayerManager.gd
