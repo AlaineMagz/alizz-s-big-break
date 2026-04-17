@@ -1,19 +1,15 @@
 @tool
 class_name Player extends Entity
 
-func _ready():
-	pass
-
-func _physics_process(delta):
+func _physics_process(delta : float) -> void:
 	
 	if(!Engine.is_editor_hint()):
 		handle_inputs()
-	
-	handle_floor()
-	
-	handle_wall()
-	
-	if(!Engine.is_editor_hint()):
+		
+		handle_floor()
+		
+		handle_wall()
+		
 		handle_vertical(delta)
 	
 	calculate_2D_position()
@@ -22,7 +18,7 @@ func _physics_process(delta):
 		queue_redraw()
 	
 
-func handle_inputs():
+func handle_inputs() -> void :
 	
 	if Input.get_axis("left","right") != 0:
 		objectPos.x += speed * Input.get_axis("left","right")
@@ -31,6 +27,7 @@ func handle_inputs():
 		objectPos.z += speed * -Input.get_axis("up","down")
 	
 	if Input.is_action_just_pressed("jump"):
+		isGrounded = false
 		isJumping = true
 		yVelocity = jumpPower
 	

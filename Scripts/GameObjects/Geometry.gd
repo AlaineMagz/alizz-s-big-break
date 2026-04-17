@@ -1,7 +1,7 @@
 @tool
 class_name Geometry extends GameObject
 
-func _draw():
+func _draw() -> void:
 	
 	if drawDebug:
 		draw_colored_polygon(getTopFacePoints(xBounds,yBounds,zBounds), debugColor)

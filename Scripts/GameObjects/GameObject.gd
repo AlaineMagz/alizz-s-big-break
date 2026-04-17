@@ -6,22 +6,22 @@ enum ObjectTypes{ Geometry, Entity, Item, Area }
 @export var objectType: ObjectTypes
 
 @export_group("Bounds")
-@export var objectPos = Vector3(0,0,0):
+@export var objectPos : Vector3 = Vector3(0,0,0):
 	set(value):
 		objectPos = value
 		queue_redraw()
 
-@export var xBounds = Vector2(0,0):
+@export var xBounds : Vector2 = Vector2(0,0):
 	set(value):
 			xBounds = value
 			queue_redraw()
 
-@export var yBounds = Vector2(0,0):
+@export var yBounds : Vector2 = Vector2(0,0):
 	set(value):
 			yBounds  = value
 			queue_redraw()
 
-@export var zBounds = Vector2(0,0):
+@export var zBounds : Vector2 = Vector2(0,0):
 	set(value):
 			zBounds = value
 			queue_redraw()
@@ -47,42 +47,42 @@ enum ObjectTypes{ Geometry, Entity, Item, Area }
 		debugOutlineWeight = value
 		queue_redraw()
 
-func _process(_delta) -> void:
+func _process(_delta : float) -> void:
 	
 	if Engine.is_editor_hint():
 		calculate_2D_position()
 		queue_redraw()
 	
 
-func calculate_2D_position():
+func calculate_2D_position() -> void:
 	
 	position = Vector2(objectPos.x + (objectPos.z) / 2, -(objectPos.y + (objectPos.z / 2)))
 	
 
-func get_front_pos():
+func get_front_pos() -> float:
 	return objectPos.z + zBounds.x
 
-func get_back_pos():
+func get_back_pos() -> float:
 	return objectPos.z + zBounds.y
 
-func get_top_pos():
+func get_top_pos() -> float:
 	return objectPos.y + yBounds.y
 
-func get_bottom_pos():
+func get_bottom_pos() -> float:
 	return objectPos.y + yBounds.x
 
-func get_left_pos():
+func get_left_pos() -> float:
 	return objectPos.x + xBounds.x
 
-func get_right_pos():
+func get_right_pos() -> float:
 	return objectPos.x + xBounds.y
 
 #Draw Functions
-func getFrontFacePoints(xBound:Vector2, yBound:Vector2, zBound:Vector2):
-	var topLeft = Vector2(xBound.x + (zBound.x / 2), -(yBound.x + (zBound.x / 2)))
-	var topRight = Vector2(xBound.y + (zBound.x / 2), -(yBound.x + (zBound.x / 2)))
-	var bottomLeft = Vector2(xBound.x + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
-	var bottomRight = Vector2(xBound.y + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
+func getFrontFacePoints(xBound:Vector2, yBound:Vector2, zBound:Vector2) -> PackedVector2Array:
+	var topLeft : Vector2 = Vector2(xBound.x + (zBound.x / 2), -(yBound.x + (zBound.x / 2)))
+	var topRight : Vector2 = Vector2(xBound.y + (zBound.x / 2), -(yBound.x + (zBound.x / 2)))
+	var bottomLeft : Vector2 = Vector2(xBound.x + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
+	var bottomRight : Vector2 = Vector2(xBound.y + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
 	
 	var frontFace : PackedVector2Array
 	frontFace.append(topLeft)
@@ -92,11 +92,11 @@ func getFrontFacePoints(xBound:Vector2, yBound:Vector2, zBound:Vector2):
 	
 	return frontFace
 
-func getFrontFaceBorderPoints(xBound:Vector2, yBound:Vector2, zBound:Vector2):
-	var topLeft = Vector2(xBound.x + (zBound.x / 2), -(yBound.x + (zBound.x / 2)))
-	var topRight = Vector2(xBound.y + (zBound.x / 2), -(yBound.x + (zBound.x / 2)))
-	var bottomLeft = Vector2(xBound.x + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
-	var bottomRight = Vector2(xBound.y + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
+func getFrontFaceBorderPoints(xBound:Vector2, yBound:Vector2, zBound:Vector2) -> PackedVector2Array:
+	var topLeft : Vector2 = Vector2(xBound.x + (zBound.x / 2), -(yBound.x + (zBound.x / 2)))
+	var topRight : Vector2 = Vector2(xBound.y + (zBound.x / 2), -(yBound.x + (zBound.x / 2)))
+	var bottomLeft : Vector2 = Vector2(xBound.x + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
+	var bottomRight : Vector2 = Vector2(xBound.y + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
 	
 	var frontFaceBorder : PackedVector2Array
 	frontFaceBorder.append(topLeft)
@@ -107,11 +107,11 @@ func getFrontFaceBorderPoints(xBound:Vector2, yBound:Vector2, zBound:Vector2):
 	
 	return frontFaceBorder
 
-func getSideFacePoints(xBound:Vector2, yBound:Vector2, zBound:Vector2):
-	var topLeft = Vector2(xBound.x + (zBound.x / 2) + xBound.y * 2, -(yBound.y + (zBound.x / 2)))
-	var topRight = Vector2(xBound.x + (zBound.y / 2) + xBound.y * 2, -(yBound.y + (zBound.y / 2)))
-	var bottomLeft = Vector2(xBound.x + (zBound.x / 2) + xBound.y * 2, -(yBound.x + (zBound.x / 2)))
-	var bottomRight = Vector2(xBound.x + (zBound.y / 2) + xBound.y * 2, -(yBound.x + (zBound.y / 2)))
+func getSideFacePoints(xBound:Vector2, yBound:Vector2, zBound:Vector2) -> PackedVector2Array:
+	var topLeft : Vector2 = Vector2(xBound.y + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
+	var topRight : Vector2 = Vector2(xBound.y + (zBound.y / 2), -(yBound.y + (zBound.y / 2)))
+	var bottomLeft : Vector2 = Vector2(xBound.y + (zBound.x / 2), -(yBound.x + (zBound.x / 2)))
+	var bottomRight : Vector2 = Vector2(xBound.y + (zBound.y / 2), -(yBound.x + (zBound.y / 2)))
 	
 	var sideFace : PackedVector2Array
 	sideFace.append(topLeft)
@@ -121,11 +121,11 @@ func getSideFacePoints(xBound:Vector2, yBound:Vector2, zBound:Vector2):
 	
 	return sideFace
 
-func getSideFaceBorderPoints(xBound:Vector2, yBound:Vector2, zBound:Vector2):
-	var topLeft = Vector2(xBound.x + (zBound.x / 2) + xBound.y * 2, -(yBound.y + (zBound.x / 2)))
-	var topRight = Vector2(xBound.x + (zBound.y / 2) + xBound.y * 2, -(yBound.y + (zBound.y / 2)))
-	var bottomLeft = Vector2(xBound.x + (zBound.x / 2) + xBound.y * 2, -(yBound.x + (zBound.x / 2)))
-	var bottomRight = Vector2(xBound.x + (zBound.y / 2) + xBound.y * 2, -(yBound.x + (zBound.y / 2)))
+func getSideFaceBorderPoints(xBound:Vector2, yBound:Vector2, zBound:Vector2) -> PackedVector2Array:
+	var topLeft : Vector2 = Vector2(xBound.y + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
+	var topRight : Vector2 = Vector2(xBound.y + (zBound.y / 2), -(yBound.y + (zBound.y / 2)))
+	var bottomLeft : Vector2 = Vector2(xBound.y + (zBound.x / 2), -(yBound.x + (zBound.x / 2)))
+	var bottomRight : Vector2 = Vector2(xBound.y + (zBound.y / 2), -(yBound.x + (zBound.y / 2)))
 	
 	var sideFaceBorder : PackedVector2Array
 	sideFaceBorder.append(topLeft)
@@ -136,11 +136,11 @@ func getSideFaceBorderPoints(xBound:Vector2, yBound:Vector2, zBound:Vector2):
 	
 	return sideFaceBorder
 
-func getTopFacePoints(xBound:Vector2, yBound:Vector2, zBound:Vector2):
-	var topLeft = Vector2(xBound.x + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
-	var topRight = Vector2(xBound.y + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
-	var bottomLeft = Vector2(xBound.x + (zBound.y / 2), -(yBound.y + (zBound.y / 2)))
-	var bottomRight = Vector2(xBound.y + (zBound.y / 2), -(yBound.y + (zBound.y / 2)))
+func getTopFacePoints(xBound:Vector2, yBound:Vector2, zBound:Vector2) -> PackedVector2Array:
+	var topLeft : Vector2 = Vector2(xBound.x + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
+	var topRight : Vector2 = Vector2(xBound.y + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
+	var bottomLeft : Vector2 = Vector2(xBound.x + (zBound.y / 2), -(yBound.y + (zBound.y / 2)))
+	var bottomRight : Vector2 = Vector2(xBound.y + (zBound.y / 2), -(yBound.y + (zBound.y / 2)))
 	
 	var topFace : PackedVector2Array
 	topFace.append(topLeft)
@@ -150,11 +150,11 @@ func getTopFacePoints(xBound:Vector2, yBound:Vector2, zBound:Vector2):
 	
 	return topFace
 
-func getTopFaceBorderPoints(xBound:Vector2, yBound:Vector2, zBound:Vector2):
-	var topLeft = Vector2(xBound.x + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
-	var topRight = Vector2(xBound.y + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
-	var bottomLeft = Vector2(xBound.x + (zBound.y / 2), -(yBound.y + (zBound.y / 2)))
-	var bottomRight = Vector2(xBound.y + (zBound.y / 2), -(yBound.y + (zBound.y / 2)))
+func getTopFaceBorderPoints(xBound:Vector2, yBound:Vector2, zBound:Vector2) -> PackedVector2Array:
+	var topLeft : Vector2 = Vector2(xBound.x + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
+	var topRight : Vector2 = Vector2(xBound.y + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
+	var bottomLeft : Vector2 = Vector2(xBound.x + (zBound.y / 2), -(yBound.y + (zBound.y / 2)))
+	var bottomRight : Vector2 = Vector2(xBound.y + (zBound.y / 2), -(yBound.y + (zBound.y / 2)))
 	
 	var topFaceBorder : PackedVector2Array
 	topFaceBorder.append(topLeft)

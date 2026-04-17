@@ -7,14 +7,14 @@ extends Node2D
 
 var layerOrder: Array[GameObject]
 
-func _process(_delta):
+func _process(_delta : float) -> void:
 	
 	layerOrder.clear()
 	sortLayers()
 	applyIndexes()
 	
 
-func getAllObjects():
+func getAllObjects() -> Array[GameObject]:
 	
 	var gameObjects : Array[GameObject]
 	gameObjects.append(player)
@@ -25,7 +25,7 @@ func getAllObjects():
 	return gameObjects
 	
 
-func sortLayers():
+func sortLayers() -> void:
 	
 	var gameObjects : Array[GameObject] = getAllObjects()
 	
@@ -34,7 +34,7 @@ func sortLayers():
 	
 	for object in gameObjects:
 		
-		var done = false
+		var done : bool = false
 		
 		for layer in layerOrder.size():
 			
@@ -47,16 +47,16 @@ func sortLayers():
 		
 	
 
-func applyIndexes():
+func applyIndexes() -> void:
 	
-	var index = 2048
+	var index : int = 2048
 	
 	for layer in layerOrder:
 		layer.z_index = index
 		index -= 1
 	
 
-func compareObjects(object1 : GameObject, object2 : GameObject):
+func compareObjects(object1 : GameObject, object2 : GameObject) -> bool:
 	
 	if object1.get_back_pos() <= object2.get_front_pos():
 		return true

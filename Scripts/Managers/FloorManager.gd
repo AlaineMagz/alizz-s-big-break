@@ -4,17 +4,17 @@ class_name floorManager
 
 @export var floorArr: Array[Node2D]
 
-func _process(_delta):
+func _process(_delta : float) -> void:
 	
 	
 	maintain_array()
 	
 
-func maintain_array():
+func maintain_array() -> void:
 	
 	if get_child_count() < floorArr.size():
 		
-		var removed = false
+		var removed : bool = false
 		
 		for index in floorArr.size():
 			
@@ -30,7 +30,7 @@ func maintain_array():
 	
 	for fl in get_child_count():
 		
-		var found = false
+		var found : bool = false
 		
 		for f in floorArr:
 			
