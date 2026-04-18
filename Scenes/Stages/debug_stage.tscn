@@ -17,18 +17,16 @@ level = NodePath("../Level")
 
 [node name="Player" type="Node2D" parent="." unique_id=357619179 node_paths=PackedStringArray("cb2d", "levelManager", "sprite")]
 z_index = 2047
-position = Vector2(125, -50)
+position = Vector2(125, -26)
 script = ExtResource("1_bgp41")
 cb2d = NodePath("CharacterBody2D")
 levelManager = NodePath("../Level")
 sprite = NodePath("CharacterBody2D/Sprite2D")
 yOffset = 1.0
 fallSpeed = 30.0
-isSprinting = null
-startedJump = null
-yVelocity = 0
+jumpPower = 15.0
 objectType = 1
-objectPos = Vector3(125, 50, 0)
+objectPos = Vector3(125, 26, 0)
 xBounds = Vector2(-25, 25)
 yBounds = Vector2(-25, 25)
 zBounds = Vector2(-25, 25)
@@ -72,9 +70,10 @@ text = "hi"
 script = ExtResource("5_sjbvb")
 player = NodePath("../../../..")
 
-[node name="Level" type="Node2D" parent="." unique_id=1523044366 node_paths=PackedStringArray("geometry_list")]
+[node name="Level" type="Node2D" parent="." unique_id=1523044366 node_paths=PackedStringArray("geometry_list", "ordered_geometry_list")]
 script = ExtResource("3_ndg24")
 geometry_list = [NodePath("Floors/FloorMain"), NodePath("Floors/FloorBasement"), NodePath("Floors/FloorEastBasement"), NodePath("Floors/FloorSouth"), NodePath("Floors/FloorWest"), NodePath("Floors/FloorNorth"), NodePath("Floors/FloorNorthEast"), NodePath("Floors/FloorEast"), NodePath("Floors/Geometry"), NodePath("Floors/Geometry2"), NodePath("Floors/Geometry3"), NodePath("Floors/Geometry4"), NodePath("Walls/Wall1"), NodePath("Walls/Wall2")]
+ordered_geometry_list = [NodePath("Floors/FloorSouth"), NodePath("Walls/Wall1"), NodePath("Floors/FloorEast"), NodePath("Floors/FloorMain"), NodePath("Floors/FloorWest"), NodePath("Walls/Wall2"), NodePath("Floors/FloorEastBasement"), NodePath("Floors/FloorBasement"), NodePath("Floors/FloorNorthEast"), NodePath("Floors/FloorNorth"), NodePath("Floors/Geometry4"), NodePath("Floors/Geometry3"), NodePath("Floors/Geometry2"), NodePath("Floors/Geometry")]
 
 [node name="Floors" type="Node2D" parent="Level" unique_id=1338993157]
 z_index = -1

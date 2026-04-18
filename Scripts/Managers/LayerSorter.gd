@@ -9,20 +9,19 @@ var layerOrder: Array[GameObject]
 
 func _process(_delta : float) -> void:
 	
-	layerOrder = getAllObjects()
-	layerOrder.sort_custom(compareObjects)
+	layerOrder.assign(level.ordered_geometry_list)
+	
+	var player_index : int = layerOrder.bsearch_custom(player, compareObjects)
+	
+	layerOrder.insert(player_index, player)
+	
 	applyIndexes()
 	
-
-func getAllObjects() -> Array[GameObject]:
-	
-	var gameObjects : Array[GameObject]
-	gameObjects.append(player)
-	gameObjects.append_array(level.geometry_list)
-	# ADD THE ENTITY ARRAY HERE
-	
-	return gameObjects
-	
+	if !Engine.is_editor_hint():
+		var indices : String = ""
+		for layer in layerOrder:
+			indices += str(layer.name) + " "
+		print(indices)
 
 func applyIndexes() -> void:
 	
@@ -37,18 +36,21 @@ func compareObjects(object1 : GameObject, object2 : GameObject) -> bool:
 	
 	if object1.get_back_pos() <= object2.get_front_pos():
 		return true
-	else: if object1.get_front_pos() >= object2.get_back_pos():
+	if object1.get_front_pos() >= object2.get_back_pos():
 		return false
 	
 	if object1.get_bottom_pos() >= object2.get_top_pos():
 		return true
-	else: if object1.get_top_pos() <= object2.get_bottom_pos():
+	if object1.get_top_pos() <= object2.get_bottom_pos():
 		return false
 	
 	if object1.get_left_pos() >= object2.get_right_pos():
 		return true
-	else: if object1.get_right_pos() <= object2.get_left_pos():
+	if object1.get_right_pos() <= object2.get_left_pos():
 		return false
 	
-	return false
+	if object1.objectPos.y > object2.objectPos.y:
+		return true
+	
+	return object1.get_instance_id() < object2.get_instance_id()
 	

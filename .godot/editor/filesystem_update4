@@ -1,8 +1,4 @@
 res://Scenes/Stages/debug_stage.tscn
-res://Scripts/GameObjects/Entity.gd
-res://Scripts/GameObjects/Entities/Player.gd
-res://Scripts/Managers/LevelManager.gd
-res://Scripts/Managers/LayerSorter.gd
-res://Scripts/fps_counter.gd
-res://Scripts/speed_viewer.gd
 res://Scripts/GameObjects/GameObject.gd
+res://Scripts/Managers/LayerSorter.gd
+res://Scripts/Managers/LevelManager.gd
