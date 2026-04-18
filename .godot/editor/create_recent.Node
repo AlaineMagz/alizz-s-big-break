@@ -1,8 +1,9 @@
+Label
+Control
 Geometry
 Camera3D
 CSGMesh3D
 Node2D
-Control
 Node
 Camera2D
 Sprite2D

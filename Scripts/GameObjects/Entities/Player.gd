@@ -6,13 +6,8 @@ func _physics_process(delta : float) -> void:
 	if(!Engine.is_editor_hint()):
 		handle_inputs()
 		
-		handle_floor()
+		handle_physics(delta)
 		
-		handle_wall()
-		
-		handle_vertical(delta)
-	
-	calculate_2D_position()
 	
 	if drawDebug:
 		queue_redraw()
@@ -27,6 +22,7 @@ func handle_inputs() -> void :
 		objectPos.z += speed * -Input.get_axis("up","down")
 	
 	if Input.is_action_just_pressed("jump"):
+		objectPos.y += 0.1
 		isGrounded = false
 		isJumping = true
 		yVelocity = jumpPower

@@ -9,8 +9,8 @@ var layerOrder: Array[GameObject]
 
 func _process(_delta : float) -> void:
 	
-	layerOrder.clear()
-	sortLayers()
+	layerOrder = getAllObjects()
+	layerOrder.sort_custom(compareObjects)
 	applyIndexes()
 	
 
@@ -18,33 +18,10 @@ func getAllObjects() -> Array[GameObject]:
 	
 	var gameObjects : Array[GameObject]
 	gameObjects.append(player)
-	gameObjects.append_array(level.floorM.floorArr)
-	gameObjects.append_array(level.wallM.wallArr)
+	gameObjects.append_array(level.geometry_list)
 	# ADD THE ENTITY ARRAY HERE
 	
 	return gameObjects
-	
-
-func sortLayers() -> void:
-	
-	var gameObjects : Array[GameObject] = getAllObjects()
-	
-	layerOrder.append(gameObjects[0])
-	gameObjects.remove_at(0)
-	
-	for object in gameObjects:
-		
-		var done : bool = false
-		
-		for layer in layerOrder.size():
-			
-			if compareObjects(object, layerOrder[layer]) && !done:
-				layerOrder.insert(layer, object)
-				done = true
-			else: if layer == layerOrder.size() - 1 && !done:
-				layerOrder.append(object)
-			
-		
 	
 
 func applyIndexes() -> void:

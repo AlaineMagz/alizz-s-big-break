@@ -77,6 +77,20 @@ func get_left_pos() -> float:
 func get_right_pos() -> float:
 	return objectPos.x + xBounds.y
 
+func is_overlapping(obj1 : GameObject, obj2 : GameObject) -> bool:
+	
+	if obj1.get_front_pos() > obj2.get_back_pos() || obj1.get_back_pos() < obj2.get_front_pos():
+		return false
+	
+	if obj1.get_bottom_pos() > obj2.get_top_pos() || obj1.get_top_pos() < obj2.get_bottom_pos():
+		return false
+	
+	if obj1.get_left_pos() > obj2.get_right_pos() || obj1.get_right_pos() < obj2.get_left_pos():
+		return false
+	
+	return true
+	
+
 #Draw Functions
 func getFrontFacePoints(xBound:Vector2, yBound:Vector2, zBound:Vector2) -> PackedVector2Array:
 	var topLeft : Vector2 = Vector2(xBound.x + (zBound.x / 2), -(yBound.x + (zBound.x / 2)))
