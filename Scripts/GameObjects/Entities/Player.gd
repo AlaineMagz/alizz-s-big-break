@@ -15,13 +15,11 @@ func _physics_process(delta : float) -> void:
 
 func handle_inputs() -> void :
 	
-	if Input.get_axis("left","right") != 0:
-		objectPos.x += speed * Input.get_axis("left","right")
+	xVelocity = speed * Input.get_axis("left","right")
 	
-	if Input.get_axis("up","down") != 0:
-		objectPos.z += speed * -Input.get_axis("up","down")
+	zVelocity = speed * -Input.get_axis("up","down")
 	
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") && isGrounded:
 		objectPos.y += 0.1
 		isGrounded = false
 		isJumping = true

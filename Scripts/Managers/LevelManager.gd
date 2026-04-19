@@ -2,7 +2,10 @@
 extends Node2D
 
 @export var geometry_list: Array[Node]
-@export var ordered_geometry_list : Array[Geometry]
+@export var ordered_geometry_list : Array[Geometry]:
+	set(value):
+		ordered_geometry_list = value
+		sort_geometry()
 
 func _process(_delta: float) -> void:
 	
@@ -20,14 +23,14 @@ func sort_geometry() -> void:
 
 func compareObjects(object1 : GameObject, object2 : GameObject) -> bool:
 	
-	if object1.get_back_pos() <= object2.get_front_pos():
-		return true
-	if object1.get_front_pos() >= object2.get_back_pos():
-		return false
-	
 	if object1.get_bottom_pos() >= object2.get_top_pos():
 		return true
 	if object1.get_top_pos() <= object2.get_bottom_pos():
+		return false
+	
+	if object1.get_back_pos() <= object2.get_front_pos():
+		return true
+	if object1.get_front_pos() >= object2.get_back_pos():
 		return false
 	
 	if object1.get_left_pos() >= object2.get_right_pos():

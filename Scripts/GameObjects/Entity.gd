@@ -38,59 +38,96 @@ class_name Entity extends GameObject
 @export var isJumping : bool = false
 @export var isFalling : bool = false
 @export var isGrounded : bool = false
+@export var xVelocity : float = 0
 @export var yVelocity : float = 0
+@export var zVelocity : float = 0
 
 func handle_physics(delta : float) -> void:
 	
-	handle_collission()
-	
-	if isGrounded:
-		yVelocity = 0
-	else:
+	if !isGrounded:
 		yVelocity -= fallSpeed * delta
+	else:
+		yVelocity = -0.1
+	yVelocity = clamp(yVelocity, -terminalVelocity, terminalVelocity * 5)
 	
-	if -yVelocity > terminalVelocity:
-		yVelocity = -terminalVelocity
+	if yVelocity < 0:
+		isFalling = true
+		isJumping = false
 	
 	if yVelocity > 0:
 		isJumping = true
 		isFalling = false
-	else: if yVelocity < 0:
-		isFalling = true
-		isJumping = false
-	else:
-		isFalling = false
-		isJumping = false
 	
 	objectPos.y += yVelocity
+	handle_vertical_collision()
+	
+	objectPos.x += xVelocity
+	handle_horizontal_x_collision()
+	
+	objectPos.z += zVelocity
+	handle_horizontal_z_collision()
 	
 	calculate_2D_position()
 	
 
-func handle_collission() -> void:
+func handle_vertical_collision() -> void:
 	
-	var done : bool = false
+	var overlapped : bool = false
 	
 	for geometry : Geometry in levelManager.geometry_list:
 		
-		if is_overlapping(self, geometry) && !done:
-			currentFloor = geometry
-			done = true
+		if is_overlapping_vertically(self, geometry):
+			
+			overlapped = true
+			
+			if isFalling:
+				objectPos.y = geometry.get_top_pos() - yBounds.x
+				yVelocity = 0
+				isGrounded = true
+				isFalling = false
+				print("SNAPPING TO " + str(objectPos.y))
+			elif isJumping:
+				objectPos.y = geometry.get_bottom_pos() - yBounds.y
+				yVelocity = 0
+				isJumping = false
+				print("OWIE MY HEAD")
+			
 		
 	
-	if !done:
-		currentFloor = null
+	if !overlapped:
 		isGrounded = false
 	
-	if currentFloor != null && !isGrounded && isFalling:
-		objectPos.y = currentFloor.get_top_pos() - yBounds.x
-		isGrounded = true
-		print("SNAPPING TO " + str(objectPos.y))
+
+func handle_horizontal_x_collision() -> void:
 	
-	if  currentFloor != null && !isGrounded && isJumping:
-		objectPos.y = currentFloor.get_bottom_pos() - yBounds.y
-		yVelocity = 0
-		print("OWIE MY HEAD")
+	for geometry : Geometry in levelManager.geometry_list:
+		
+		if is_overlapping_horizontally(self, geometry):
+			
+			if xVelocity > 0:
+				objectPos.x = geometry.get_left_pos() - xBounds.y
+			elif xVelocity < 0:
+				objectPos.x = geometry.get_right_pos() - xBounds.x
+			
+			xVelocity = 0
+			
+		
+	
+
+func handle_horizontal_z_collision() -> void:
+	
+	for geometry : Geometry in levelManager.geometry_list:
+		
+		if is_overlapping_horizontally(self, geometry):
+			
+			if zVelocity > 0:
+				objectPos.z = geometry.get_front_pos() - zBounds.y
+			elif zVelocity < 0:
+				objectPos.z = geometry.get_back_pos() - zBounds.x
+			
+			zVelocity = 0
+			
+		
 	
 
 func _draw() -> void:

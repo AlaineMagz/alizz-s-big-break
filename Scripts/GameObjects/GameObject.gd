@@ -77,15 +77,33 @@ func get_left_pos() -> float:
 func get_right_pos() -> float:
 	return objectPos.x + xBounds.y
 
-func is_overlapping(obj1 : GameObject, obj2 : GameObject) -> bool:
+func is_overlapping_vertically(obj1 : GameObject, obj2 : GameObject) -> bool:
 	
-	if obj1.get_front_pos() > obj2.get_back_pos() || obj1.get_back_pos() < obj2.get_front_pos():
+	var hPadding : float = 0.5
+	
+	if obj1.get_front_pos() + hPadding >= obj2.get_back_pos() || obj1.get_back_pos() - hPadding <= obj2.get_front_pos():
 		return false
 	
-	if obj1.get_bottom_pos() > obj2.get_top_pos() || obj1.get_top_pos() < obj2.get_bottom_pos():
+	if obj1.get_bottom_pos() >= obj2.get_top_pos() || obj1.get_top_pos() <= obj2.get_bottom_pos():
 		return false
 	
-	if obj1.get_left_pos() > obj2.get_right_pos() || obj1.get_right_pos() < obj2.get_left_pos():
+	if obj1.get_left_pos() + hPadding >= obj2.get_right_pos() || obj1.get_right_pos() - hPadding <= obj2.get_left_pos():
+		return false
+	
+	return true
+	
+
+func is_overlapping_horizontally(obj1 : GameObject, obj2 : GameObject) -> bool:
+	
+	var vPadding : float = 0.5
+	
+	if obj1.get_front_pos() >= obj2.get_back_pos() || obj1.get_back_pos() <= obj2.get_front_pos():
+		return false
+	
+	if obj1.get_bottom_pos() + vPadding >= obj2.get_top_pos() || obj1.get_top_pos() - vPadding <= obj2.get_bottom_pos():
+		return false
+	
+	if obj1.get_left_pos() >= obj2.get_right_pos() || obj1.get_right_pos() <= obj2.get_left_pos():
 		return false
 	
 	return true
