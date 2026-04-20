@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dqh7udbvoaa3s"]
+
+[node name="Control" type="Control" unique_id=1279483671]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GraphEdit" type="GraphEdit" parent="." unique_id=1110482135]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+grid_pattern = 1
+right_disconnects = true
+minimap_enabled = false
+show_zoom_label = true
+show_grid_buttons = false
+show_minimap_button = false
+
+[node name="GraphNode" type="GraphNode" parent="GraphEdit" unique_id=366602420]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 85.0
+offset_right = 265.0
+offset_bottom = 207.0
+mouse_filter = 1
+position_offset = Vector2(75, 85)
+title = "Dialogue"

@@ -59,6 +59,11 @@ func calculate_2D_position() -> void:
 	position = Vector2(objectPos.x + (objectPos.z) / 2, -(objectPos.y + (objectPos.z / 2)))
 	
 
+func get_2D_position(objPos : Vector3) -> Vector2:
+	
+	return Vector2(objPos.x + (objPos.z) / 2, -(objPos.y + (objPos.z / 2)))
+	
+
 func get_front_pos() -> float:
 	return objectPos.z + zBounds.x
 

@@ -29,6 +29,7 @@ window/size/viewport_width=800
 window/size/viewport_height=600
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
+window/vsync/vsync_mode=0
 
 [input]
 

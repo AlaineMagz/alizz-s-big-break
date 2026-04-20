@@ -1,15 +1,18 @@
 @tool
 extends Node2D
 
-@export var player: Node2D
-@export var level: Node2D
-@export var entities: Node2D
+@export var player: Player
+@export var level: LevelManager
 
 var layerOrder: Array[GameObject]
 
 func _process(_delta : float) -> void:
 	
 	layerOrder.assign(level.ordered_geometry_list)
+	
+	for entity in level.entity_list:
+		var index : int = layerOrder.bsearch_custom(entity, compareObjects)
+		layerOrder.insert(index, entity)
 	
 	var player_index : int = layerOrder.bsearch_custom(player, compareObjects)
 	

@@ -1,5 +1,5 @@
 @tool
-extends Node2D
+class_name LevelManager extends Node2D
 
 @export var geometry_list: Array[Node]
 @export var ordered_geometry_list : Array[Geometry]:
@@ -7,9 +7,12 @@ extends Node2D
 		ordered_geometry_list = value
 		sort_geometry()
 
+@export var entity_list : Array[Node]
+
 func _process(_delta: float) -> void:
 	
 	geometry_list = get_child(0).get_children() + get_child(1).get_children()
+	entity_list = get_child(2).get_children()
 	
 	if ordered_geometry_list.is_empty():
 		sort_geometry()

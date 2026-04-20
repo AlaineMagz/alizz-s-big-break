@@ -9,21 +9,19 @@ class_name Entity extends GameObject
 @export var currentFloor : Geometry
 
 @export_group("Entity Visual")
-@export var sprite : Sprite2D
-@export var xOffset : float = 0:
-	set(value):
-			xOffset = value
-			queue_redraw()
+var spriteNode : Sprite2D
 
-@export var yOffset : float = 0:
+@export var sprite : CompressedTexture2D:
 	set(value):
-			yOffset = value
-			queue_redraw()
+		sprite = value
+		if is_node_ready():
+			handle_sprite()
 
-@export var zOffset : float = 0:
+@export var spriteOffset : Vector3 = Vector3.ZERO:
 	set(value):
-		zOffset = value
-		queue_redraw()
+		spriteOffset = value
+		if is_node_ready():
+			handle_sprite()
 
 @export_group("Entity Stat Variables")
 @export var speed : float = 10
@@ -128,6 +126,28 @@ func handle_horizontal_z_collision() -> void:
 			zVelocity = 0
 			
 		
+	
+
+func handle_sprite() -> void:
+	
+	if sprite == null:
+		return
+	
+	var found : bool = false
+	
+	for child in self.get_children(true):
+		if child.name == "EntitySprite":
+			spriteNode = child
+			found = true
+	
+	if !found:
+		spriteNode = Sprite2D.new()
+		spriteNode.name = "EntitySprite"
+		add_child(spriteNode)
+		spriteNode.owner = get_tree().edited_scene_root
+	
+	spriteNode.texture = sprite
+	spriteNode.position = get_2D_position(spriteOffset)
 	
 
 func _draw() -> void:
