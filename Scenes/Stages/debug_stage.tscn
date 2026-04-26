@@ -4,11 +4,14 @@
 [ext_resource type="Script" uid="uid://bojxav7ypbpg6" path="res://Scripts/Managers/LayerSorter.gd" id="1_ctrck"]
 [ext_resource type="Texture2D" uid="uid://b0dfnrgnobswt" path="res://Art/Player.png" id="3_ctrck"]
 [ext_resource type="Script" uid="uid://crpvf7n6tndtg" path="res://Scripts/Managers/LevelManager.gd" id="3_ndg24"]
+[ext_resource type="Script" uid="uid://6xit114i4p2w" path="res://Scripts/debug_panel.gd" id="4_x5d2c"]
 [ext_resource type="Script" uid="uid://c40fpw8uixexn" path="res://Scripts/speed_viewer.gd" id="5_sjbvb"]
 [ext_resource type="Script" uid="uid://peweb568qq7d" path="res://Scripts/GameObjects/Geometry.gd" id="6_ctrck"]
 [ext_resource type="Script" uid="uid://bapaqgtwbl7tt" path="res://Scripts/fps_counter.gd" id="6_ycoyw"]
 [ext_resource type="Script" uid="uid://ictcv3fjrbvn" path="res://Scripts/GameObjects/Entities/NPC.gd" id="8_t1awj"]
 [ext_resource type="Texture2D" uid="uid://befiia5xqoe4g" path="res://Art/NPC.png" id="9_t1awj"]
+[ext_resource type="Script" uid="uid://ck3bpshjpxjw8" path="res://Scripts/mouse_tracker.gd" id="11_avano"]
+[ext_resource type="Texture2D" uid="uid://di0gri06r424q" path="res://Art/icon.svg" id="11_nepeh"]
 
 [node name="DebugStage" type="Node2D" unique_id=1521028220]
 
@@ -37,7 +40,7 @@ debugColor = Color(0.8721739, 0.40580344, 0.5258271, 1)
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1801880361]
 zoom = Vector2(0.75, 0.75)
 
-[node name="Control" type="Control" parent="Player/Camera2D" unique_id=266621718]
+[node name="Control" type="Control" parent="Player/Camera2D" unique_id=266621718 node_paths=PackedStringArray("level")]
 z_index = 4096
 layout_mode = 3
 anchors_preset = 0
@@ -46,6 +49,8 @@ offset_top = -362.0
 offset_right = -416.33334
 offset_bottom = -333.0
 scale = Vector2(2, 2)
+script = ExtResource("4_x5d2c")
+level = NodePath("../../../Level")
 
 [node name="Label" type="Label" parent="Player/Camera2D/Control" unique_id=1026871604]
 layout_mode = 0
@@ -64,14 +69,152 @@ text = "hi"
 script = ExtResource("5_sjbvb")
 player = NodePath("../../..")
 
+[node name="Panel" type="Panel" parent="Player/Camera2D/Control" unique_id=1478181527]
+visible = false
+layout_mode = 0
+offset_left = 1.0
+offset_top = 119.0125
+offset_right = 498.0
+offset_bottom = 356.0125
+
+[node name="left object" type="Control" parent="Player/Camera2D/Control/Panel" unique_id=1306353591]
+anchors_preset = 0
+offset_right = 247.5
+offset_bottom = 238.0
+
+[node name="Label" type="Label" parent="Player/Camera2D/Control/Panel/left object" unique_id=2046257335]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 8.5
+offset_right = 88.0
+offset_bottom = 31.5
+text = "object left"
+
+[node name="Label2" type="Label" parent="Player/Camera2D/Control/Panel/left object" unique_id=425307780]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 36.0
+offset_right = 51.0
+offset_bottom = 59.0
+text = "top"
+
+[node name="Label3" type="Label" parent="Player/Camera2D/Control/Panel/left object" unique_id=1783879422]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 67.0
+offset_right = 69.0
+offset_bottom = 90.0
+text = "bottom"
+
+[node name="Label4" type="Label" parent="Player/Camera2D/Control/Panel/left object" unique_id=1067783135]
+layout_mode = 0
+offset_left = 13.5
+offset_top = 96.5
+offset_right = 53.5
+offset_bottom = 119.5
+text = "front"
+
+[node name="Label5" type="Label" parent="Player/Camera2D/Control/Panel/left object" unique_id=491023120]
+layout_mode = 0
+offset_left = 11.5
+offset_top = 123.0
+offset_right = 51.5
+offset_bottom = 146.0
+text = "back"
+
+[node name="Label6" type="Label" parent="Player/Camera2D/Control/Panel/left object" unique_id=2013741794]
+layout_mode = 0
+offset_left = 12.5
+offset_top = 153.5
+offset_right = 52.5
+offset_bottom = 176.5
+text = "left"
+
+[node name="Label7" type="Label" parent="Player/Camera2D/Control/Panel/left object" unique_id=769413804]
+layout_mode = 0
+offset_left = 13.5
+offset_top = 188.0
+offset_right = 53.5
+offset_bottom = 211.0
+text = "right"
+
+[node name="Control" type="Control" parent="Player/Camera2D/Control/Panel" unique_id=2050467642]
+anchors_preset = 0
+offset_left = 245.5
+offset_right = 285.5
+offset_bottom = 40.0
+
+[node name="Label8" type="Label" parent="Player/Camera2D/Control/Panel/Control" unique_id=1803258973]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 8.5
+offset_right = 88.0
+offset_bottom = 31.5
+text = "object right"
+
+[node name="Label9" type="Label" parent="Player/Camera2D/Control/Panel/Control" unique_id=816051295]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 36.0
+offset_right = 51.0
+offset_bottom = 59.0
+text = "top"
+
+[node name="Label10" type="Label" parent="Player/Camera2D/Control/Panel/Control" unique_id=631361029]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 67.0
+offset_right = 69.0
+offset_bottom = 90.0
+text = "bottom"
+
+[node name="Label11" type="Label" parent="Player/Camera2D/Control/Panel/Control" unique_id=1694356087]
+layout_mode = 0
+offset_left = 13.5
+offset_top = 96.5
+offset_right = 53.5
+offset_bottom = 119.5
+text = "front"
+
+[node name="Label12" type="Label" parent="Player/Camera2D/Control/Panel/Control" unique_id=328074209]
+layout_mode = 0
+offset_left = 11.5
+offset_top = 123.0
+offset_right = 51.5
+offset_bottom = 146.0
+text = "back"
+
+[node name="Label13" type="Label" parent="Player/Camera2D/Control/Panel/Control" unique_id=277366141]
+layout_mode = 0
+offset_left = 12.5
+offset_top = 153.5
+offset_right = 52.5
+offset_bottom = 176.5
+text = "left"
+
+[node name="Label14" type="Label" parent="Player/Camera2D/Control/Panel/Control" unique_id=1635692815]
+layout_mode = 0
+offset_left = 13.5
+offset_top = 188.0
+offset_right = 53.5
+offset_bottom = 211.0
+text = "right"
+
+[node name="Button" type="Button" parent="Player/Camera2D/Control" unique_id=2049884260]
+layout_mode = 0
+offset_left = 493.0
+offset_top = -3.987503
+offset_right = 501.0
+offset_bottom = 4.012497
+
 [node name="EntitySprite" type="Sprite2D" parent="Player" unique_id=1482112888]
 position = Vector2(7.9925, -100.4825)
 texture = ExtResource("3_ctrck")
 
 [node name="Level" type="Node2D" parent="." unique_id=1523044366 node_paths=PackedStringArray("geometry_list", "ordered_geometry_list", "entity_list")]
 script = ExtResource("3_ndg24")
-geometry_list = [NodePath("Floors/FloorMain"), NodePath("Floors/FloorBasement"), NodePath("Floors/FloorEastBasement"), NodePath("Floors/FloorWest"), NodePath("Floors/FloorNorthEast"), NodePath("Floors/FloorEast"), NodePath("Floors/Geometry2"), NodePath("Floors/Geometry3"), NodePath("Floors/Geometry4"), NodePath("Walls/Wall1"), NodePath("Walls/Wall2")]
-ordered_geometry_list = [NodePath("Floors/Geometry4"), NodePath("Walls/Wall1"), NodePath("Floors/Geometry3"), NodePath("Floors/Geometry2"), NodePath("Floors/FloorEast"), NodePath("Floors/FloorNorthEast"), NodePath("Floors/FloorMain"), NodePath("Floors/FloorWest"), NodePath("Walls/Wall2"), NodePath("Floors/FloorEastBasement"), NodePath("Floors/FloorBasement")]
+geometry_list = [NodePath("Floors/FloorMain"), NodePath("Floors/FloorBasement"), NodePath("Floors/FloorEastBasement"), NodePath("Floors/FloorWest"), NodePath("Floors/FloorNorthEast"), NodePath("Floors/FloorEast"), NodePath("Floors/Geometry2"), NodePath("Floors/Geometry3"), NodePath("Floors/Geometry4"), NodePath("Floors/Geometry"), NodePath("Floors/Geometry5"), NodePath("Floors/Geometry6"), NodePath("Walls/Wall1"), NodePath("Walls/Wall2")]
+ordered_geometry_list = [NodePath("Floors/Geometry4"), NodePath("Walls/Wall1"), NodePath("Floors/Geometry3"), NodePath("Floors/Geometry2"), NodePath("Floors/Geometry"), NodePath("Floors/FloorEast"), NodePath("Floors/FloorMain"), NodePath("Floors/FloorWest"), NodePath("Floors/FloorNorthEast"), NodePath("Floors/Geometry5"), NodePath("Floors/Geometry6"), NodePath("Walls/Wall2"), NodePath("Floors/FloorEastBasement"), NodePath("Floors/FloorBasement")]
 entity_list = [NodePath("Entities/NPC")]
 
 [node name="Floors" type="Node2D" parent="Level" unique_id=1338993157]
@@ -82,12 +225,12 @@ z_index = 2040
 script = ExtResource("6_ctrck")
 xBounds = Vector2(-200, 200)
 yBounds = Vector2(0, 1)
-zBounds = Vector2(-600, 1000)
+zBounds = Vector2(-200, 200)
 drawDebug = true
 debugColor = Color(0.20638901, 0.424793, 0.33014047, 1)
 
 [node name="FloorBasement" type="Node2D" parent="Level/Floors" unique_id=1610286398]
-z_index = 2036
+z_index = 2033
 position = Vector2(0, 300)
 script = ExtResource("6_ctrck")
 objectPos = Vector3(0, -300, 0)
@@ -98,7 +241,7 @@ drawDebug = true
 debugColor = Color(0.31257963, 0.47206515, 0.6501949, 1)
 
 [node name="FloorEastBasement" type="Node2D" parent="Level/Floors" unique_id=1794944108]
-z_index = 2037
+z_index = 2034
 position = Vector2(400, 300)
 script = ExtResource("6_ctrck")
 objectPos = Vector3(400, -300, 0)
@@ -120,7 +263,7 @@ drawDebug = true
 debugColor = Color(0.9380429, 0.741285, 0, 1)
 
 [node name="FloorNorthEast" type="Node2D" parent="Level/Floors" unique_id=626408439]
-z_index = 2041
+z_index = 2038
 position = Vector2(600, -200)
 script = ExtResource("6_ctrck")
 objectPos = Vector3(400, 0, 400)
@@ -131,7 +274,7 @@ drawDebug = true
 debugColor = Color(0.64186317, 0.34105295, 0.6337766, 1)
 
 [node name="FloorEast" type="Node2D" parent="Level/Floors" unique_id=1405063371]
-z_index = 2042
+z_index = 2041
 position = Vector2(400, 0)
 script = ExtResource("6_ctrck")
 objectPos = Vector3(400, 0, 0)
@@ -173,6 +316,41 @@ zBounds = Vector2(-200, 200)
 drawDebug = true
 metadata/_custom_type_script = "uid://peweb568qq7d"
 
+[node name="Geometry" type="Node2D" parent="Level/Floors" unique_id=944896441]
+z_index = 2042
+position = Vector2(-200, 200)
+script = ExtResource("6_ctrck")
+objectPos = Vector3(0, 0, -400)
+xBounds = Vector2(-200, 200)
+yBounds = Vector2(0, 1)
+zBounds = Vector2(-200, 200)
+drawDebug = true
+debugColor = Color(0.22886029, 0.5716931, 0.59708786, 1)
+metadata/_custom_type_script = "uid://peweb568qq7d"
+
+[node name="Geometry5" type="Node2D" parent="Level/Floors" unique_id=1778460517]
+z_index = 2037
+position = Vector2(200, -200)
+script = ExtResource("6_ctrck")
+objectPos = Vector3(0, 0, 400)
+xBounds = Vector2(-200, 200)
+yBounds = Vector2(0, 1)
+zBounds = Vector2(-200, 200)
+drawDebug = true
+metadata/_custom_type_script = "uid://peweb568qq7d"
+
+[node name="Geometry6" type="Node2D" parent="Level/Floors" unique_id=1076527900]
+z_index = 2036
+position = Vector2(400, -400)
+script = ExtResource("6_ctrck")
+objectPos = Vector3(0, 0, 800)
+xBounds = Vector2(-200, 200)
+yBounds = Vector2(0, 1)
+zBounds = Vector2(-200, 200)
+drawDebug = true
+debugColor = Color(0.5955409, 0.35880038, 0.21872467, 1)
+metadata/_custom_type_script = "uid://peweb568qq7d"
+
 [node name="Walls" type="Node2D" parent="Level" unique_id=1995041027]
 
 [node name="Wall1" type="Node2D" parent="Level/Walls" unique_id=1127661443]
@@ -186,7 +364,7 @@ zBounds = Vector2(-200, 200)
 drawDebug = true
 
 [node name="Wall2" type="Node2D" parent="Level/Walls" unique_id=1328136569]
-z_index = 2038
+z_index = 2035
 position = Vector2(400, 150)
 script = ExtResource("6_ctrck")
 objectPos = Vector3(400, -150, 0)
@@ -198,10 +376,11 @@ debugColor = Color(0.82706475, 0.61612564, 0.4903322, 1)
 
 [node name="Entities" type="Node2D" parent="Level" unique_id=1317467686]
 
-[node name="NPC" type="Node2D" parent="Level/Entities" unique_id=19286174]
+[node name="NPC" type="Node2D" parent="Level/Entities" unique_id=19286174 node_paths=PackedStringArray("levelManager")]
 z_index = 2047
 position = Vector2(-400, -178)
 script = ExtResource("8_t1awj")
+levelManager = NodePath("../..")
 sprite = ExtResource("9_t1awj")
 spriteOffset = Vector3(0, 105.845, 18.41)
 objectPos = Vector3(-400, 178, 0)
@@ -214,3 +393,10 @@ metadata/_custom_type_script = "uid://ictcv3fjrbvn"
 [node name="EntitySprite" type="Sprite2D" parent="Level/Entities/NPC" unique_id=1267885116]
 position = Vector2(9.205, -115.05)
 texture = ExtResource("9_t1awj")
+
+[node name="mouse_tracker" type="Sprite2D" parent="." unique_id=731209430]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("11_nepeh")
+script = ExtResource("11_avano")
+
+[connection signal="pressed" from="Player/Camera2D/Control/Button" to="Player/Camera2D/Control" method="_on_button_pressed"]

@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://b2kxe7cmgg6eq"]
+
+[ext_resource type="Script" uid="uid://6xit114i4p2w" path="res://Scripts/debug_panel.gd" id="1_21sra"]
+[ext_resource type="Script" uid="uid://crpvf7n6tndtg" path="res://Scripts/Managers/LevelManager.gd" id="2_5omnd"]
+[ext_resource type="Script" uid="uid://peweb568qq7d" path="res://Scripts/GameObjects/Geometry.gd" id="3_272df"]
+[ext_resource type="Texture2D" uid="uid://di0gri06r424q" path="res://Art/icon.svg" id="3_nc4ts"]
+[ext_resource type="Script" uid="uid://ck3bpshjpxjw8" path="res://Scripts/mouse_tracker.gd" id="4_272df"]
+
+[node name="Node2D" type="Node2D" unique_id=1006506931]
+
+[node name="Control" type="Control" parent="." unique_id=1752898462 node_paths=PackedStringArray("level")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_21sra")
+level = NodePath("../Node2D")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=450656141]
+script = ExtResource("2_5omnd")
+
+[node name="Node2D" type="Node2D" parent="Node2D" unique_id=1327375607]
+
+[node name="Geometry" type="Node2D" parent="Node2D/Node2D" unique_id=361131790]
+script = ExtResource("3_272df")
+xBounds = Vector2(-100, 100)
+yBounds = Vector2(-100, 100)
+zBounds = Vector2(-100, 100)
+drawDebug = true
+metadata/_custom_type_script = "uid://peweb568qq7d"
+
+[node name="Node2D2" type="Node2D" parent="Node2D" unique_id=42385916]
+
+[node name="Node2D3" type="Node2D" parent="Node2D" unique_id=1144295069]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=461199933]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("3_nc4ts")
+script = ExtResource("4_272df")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=363675572]

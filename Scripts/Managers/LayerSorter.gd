@@ -37,14 +37,14 @@ func applyIndexes() -> void:
 
 func compareObjects(object1 : GameObject, object2 : GameObject) -> bool:
 	
-	if object1.get_bottom_pos() >= object2.get_top_pos():
-		return true
-	if object1.get_top_pos() <= object2.get_bottom_pos():
-		return false
-	
 	if object1.get_back_pos() <= object2.get_front_pos():
 		return true
 	if object1.get_front_pos() >= object2.get_back_pos():
+		return false
+	
+	if object1.get_bottom_pos() >= object2.get_top_pos():
+		return true
+	if object1.get_top_pos() <= object2.get_bottom_pos():
 		return false
 	
 	if object1.get_left_pos() >= object2.get_right_pos():

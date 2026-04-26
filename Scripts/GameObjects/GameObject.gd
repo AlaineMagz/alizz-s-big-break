@@ -47,6 +47,26 @@ enum ObjectTypes{ Geometry, Entity, Item, Area }
 		debugOutlineWeight = value
 		queue_redraw()
 
+@export_group("Debug Tools")
+
+@export_tool_button("Print Top Position") 
+var top_pos_button : Callable = func() -> void : print(get_top_pos())
+
+@export_tool_button("Print Bottom Position") 
+var bottom_pos_button : Callable = func() -> void : print(get_bottom_pos())
+
+@export_tool_button("Print Front Position") 
+var front_pos_button : Callable = func() -> void : print(get_front_pos())
+
+@export_tool_button("Print Back Position") 
+var back_pos_button : Callable = func() -> void : print(get_back_pos())
+
+@export_tool_button("Print Left Position") 
+var left_pos_button : Callable = func() -> void : print(get_left_pos())
+
+@export_tool_button("Print Right Position") 
+var right_pos_button : Callable = func() -> void : print(get_right_pos())
+
 func _process(_delta : float) -> void:
 	
 	if Engine.is_editor_hint():
@@ -116,10 +136,10 @@ func is_overlapping_horizontally(obj1 : GameObject, obj2 : GameObject) -> bool:
 
 #Draw Functions
 func getFrontFacePoints(xBound:Vector2, yBound:Vector2, zBound:Vector2) -> PackedVector2Array:
-	var topLeft : Vector2 = Vector2(xBound.x + (zBound.x / 2), -(yBound.x + (zBound.x / 2)))
-	var topRight : Vector2 = Vector2(xBound.y + (zBound.x / 2), -(yBound.x + (zBound.x / 2)))
-	var bottomLeft : Vector2 = Vector2(xBound.x + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
-	var bottomRight : Vector2 = Vector2(xBound.y + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
+	var bottomLeft : Vector2 = Vector2(xBound.x + (zBound.x / 2), -(yBound.x + (zBound.x / 2)))
+	var bottomRight : Vector2 = Vector2(xBound.y + (zBound.x / 2), -(yBound.x + (zBound.x / 2)))
+	var topLeft : Vector2 = Vector2(xBound.x + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
+	var topRight : Vector2 = Vector2(xBound.y + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
 	
 	var frontFace : PackedVector2Array
 	frontFace.append(topLeft)
@@ -130,10 +150,10 @@ func getFrontFacePoints(xBound:Vector2, yBound:Vector2, zBound:Vector2) -> Packe
 	return frontFace
 
 func getFrontFaceBorderPoints(xBound:Vector2, yBound:Vector2, zBound:Vector2) -> PackedVector2Array:
-	var topLeft : Vector2 = Vector2(xBound.x + (zBound.x / 2), -(yBound.x + (zBound.x / 2)))
-	var topRight : Vector2 = Vector2(xBound.y + (zBound.x / 2), -(yBound.x + (zBound.x / 2)))
-	var bottomLeft : Vector2 = Vector2(xBound.x + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
-	var bottomRight : Vector2 = Vector2(xBound.y + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
+	var bottomLeft : Vector2 = Vector2(xBound.x + (zBound.x / 2), -(yBound.x + (zBound.x / 2)))
+	var bottomRight : Vector2 = Vector2(xBound.y + (zBound.x / 2), -(yBound.x + (zBound.x / 2)))
+	var topLeft : Vector2 = Vector2(xBound.x + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
+	var topRight : Vector2 = Vector2(xBound.y + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
 	
 	var frontFaceBorder : PackedVector2Array
 	frontFaceBorder.append(topLeft)
@@ -174,10 +194,10 @@ func getSideFaceBorderPoints(xBound:Vector2, yBound:Vector2, zBound:Vector2) -> 
 	return sideFaceBorder
 
 func getTopFacePoints(xBound:Vector2, yBound:Vector2, zBound:Vector2) -> PackedVector2Array:
-	var topLeft : Vector2 = Vector2(xBound.x + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
-	var topRight : Vector2 = Vector2(xBound.y + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
-	var bottomLeft : Vector2 = Vector2(xBound.x + (zBound.y / 2), -(yBound.y + (zBound.y / 2)))
-	var bottomRight : Vector2 = Vector2(xBound.y + (zBound.y / 2), -(yBound.y + (zBound.y / 2)))
+	var bottomLeft : Vector2 = Vector2(xBound.x + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
+	var bottomRight : Vector2 = Vector2(xBound.y + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
+	var topLeft : Vector2 = Vector2(xBound.x + (zBound.y / 2), -(yBound.y + (zBound.y / 2)))
+	var topRight : Vector2 = Vector2(xBound.y + (zBound.y / 2), -(yBound.y + (zBound.y / 2)))
 	
 	var topFace : PackedVector2Array
 	topFace.append(topLeft)
@@ -188,10 +208,10 @@ func getTopFacePoints(xBound:Vector2, yBound:Vector2, zBound:Vector2) -> PackedV
 	return topFace
 
 func getTopFaceBorderPoints(xBound:Vector2, yBound:Vector2, zBound:Vector2) -> PackedVector2Array:
-	var topLeft : Vector2 = Vector2(xBound.x + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
-	var topRight : Vector2 = Vector2(xBound.y + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
-	var bottomLeft : Vector2 = Vector2(xBound.x + (zBound.y / 2), -(yBound.y + (zBound.y / 2)))
-	var bottomRight : Vector2 = Vector2(xBound.y + (zBound.y / 2), -(yBound.y + (zBound.y / 2)))
+	var bottomLeft : Vector2 = Vector2(xBound.x + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
+	var bottomRight : Vector2 = Vector2(xBound.y + (zBound.x / 2), -(yBound.y + (zBound.x / 2)))
+	var topLeft : Vector2 = Vector2(xBound.x + (zBound.y / 2), -(yBound.y + (zBound.y / 2)))
+	var topRight : Vector2 = Vector2(xBound.y + (zBound.y / 2), -(yBound.y + (zBound.y / 2)))
 	
 	var topFaceBorder : PackedVector2Array
 	topFaceBorder.append(topLeft)

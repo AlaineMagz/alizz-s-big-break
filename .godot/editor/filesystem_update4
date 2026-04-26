@@ -1,6 +1,4 @@
 res://Scenes/Stages/debug_stage.tscn
-res://Scripts/GameObjects/Entities/NPC.gd
-res://Scripts/GameObjects/Entity.gd
-res://Scripts/GameObjects/GameObject.gd
-res://Scripts/Managers/LevelManager.gd
-res://Scripts/Managers/LayerSorter.gd
+res://Scripts/debug_panel.gd
+res://Scripts/mouse_tracker.gd
+res://Scenes/polygon_test.tscn

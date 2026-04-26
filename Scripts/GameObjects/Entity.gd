@@ -83,12 +83,12 @@ func handle_vertical_collision() -> void:
 				yVelocity = 0
 				isGrounded = true
 				isFalling = false
-				print("SNAPPING TO " + str(objectPos.y))
+				#print("SNAPPING TO " + str(objectPos.y))
 			elif isJumping:
 				objectPos.y = geometry.get_bottom_pos() - yBounds.y
 				yVelocity = 0
 				isJumping = false
-				print("OWIE MY HEAD")
+				#print("OWIE MY HEAD")
 			
 		
 	
