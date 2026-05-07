@@ -2,6 +2,25 @@ extends Control
 
 @onready var debug_panel : Panel = self.get_child(2)
 @export var level : LevelManager
+@export var player : Player
+
+var left_object : GameObject
+@export var left_name : Label
+@export var left_top : Label
+@export var left_bottom : Label
+@export var left_front : Label
+@export var left_back : Label
+@export var left_left : Label
+@export var left_right : Label
+
+var right_object : GameObject
+@export var right_name : Label
+@export var right_top : Label
+@export var right_bottom : Label
+@export var right_front : Label
+@export var right_back : Label
+@export var right_left : Label
+@export var right_right : Label
 
 var selected_object_1 : GameObject
 var selected_object_2 : GameObject
@@ -17,6 +36,7 @@ func _process(_delta: float) -> void:
 		
 		list_of_hovered_objects.clear()
 		var level_objects : Array[Node] = level.geometry_list + level.entity_list
+		level_objects.append(player)
 		
 		for object in level_objects:
 			if is_object_under_mouse(object):
@@ -25,15 +45,58 @@ func _process(_delta: float) -> void:
 	
 	last_mouse_position = get_global_mouse_position()
 	
-	if Input.is_action_just_pressed("interact"):
-		print(list_of_hovered_objects)
-	
 
 func _input(event: InputEvent) -> void:
 	
-	if event = Input.is_action_just_pressed("mouse1"):
+	if event.is_action_pressed("mouse1"):
+		
+		if left_object == null && !list_of_hovered_objects.is_empty():
+			left_object = list_of_hovered_objects[0]
+			update_left_labels()
+		elif list_of_hovered_objects.has(left_object):
+			var i : int = (list_of_hovered_objects.find(left_object) + 1) % list_of_hovered_objects.size()
+			left_object = list_of_hovered_objects[i]
+			update_left_labels()
+		elif !list_of_hovered_objects.is_empty():
+			left_object = list_of_hovered_objects[0]
+			update_left_labels()
 		
 	
+	if event.is_action_pressed("mouse2"):
+		
+		if right_object == null && !list_of_hovered_objects.is_empty():
+			right_object = list_of_hovered_objects[0]
+			update_right_labels()
+		elif list_of_hovered_objects.has(right_object):
+			var i : int = (list_of_hovered_objects.find(right_object) + 1) % list_of_hovered_objects.size()
+			right_object = list_of_hovered_objects[i]
+			update_right_labels()
+		elif !list_of_hovered_objects.is_empty():
+			right_object = list_of_hovered_objects[0]
+			update_right_labels()
+		
+	
+	if event.is_action_pressed("interact"):
+		print(list_of_hovered_objects)
+	
+
+func update_left_labels() -> void:
+	left_name.text = "Name: " + left_object.name
+	left_top.text = "Top Pos: " + str(left_object.get_top_pos())
+	left_bottom.text = "Bottom Pos: " + str(left_object.get_bottom_pos())
+	left_front.text = "Front Pos: " + str(left_object.get_front_pos())
+	left_back.text = "Back Pos: " + str(left_object.get_back_pos())
+	left_left.text = "Left Pos: " + str(left_object.get_left_pos())
+	left_right.text = "Right Pos: " + str(left_object.get_right_pos())
+
+func update_right_labels() -> void:
+	right_name.text = "Name: " + right_object.name
+	right_top.text = "Top Pos: " + str(right_object.get_top_pos())
+	right_bottom.text = "Bottom Pos: " + str(right_object.get_bottom_pos())
+	right_front.text = "Front Pos: " + str(right_object.get_front_pos())
+	right_back.text = "Back Pos: " + str(right_object.get_back_pos())
+	right_left.text = "Left Pos: " + str(right_object.get_left_pos())
+	right_right.text = "Right Pos: " + str(right_object.get_right_pos())
 
 func is_object_under_mouse(object : GameObject) -> bool:
 	

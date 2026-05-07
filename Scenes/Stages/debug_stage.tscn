@@ -40,7 +40,7 @@ debugColor = Color(0.8721739, 0.40580344, 0.5258271, 1)
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1801880361]
 zoom = Vector2(0.75, 0.75)
 
-[node name="Control" type="Control" parent="Player/Camera2D" unique_id=266621718 node_paths=PackedStringArray("level")]
+[node name="Control" type="Control" parent="Player/Camera2D" unique_id=266621718 node_paths=PackedStringArray("level", "player", "left_name", "left_top", "left_bottom", "left_front", "left_back", "left_left", "left_right", "right_name", "right_top", "right_bottom", "right_front", "right_back", "right_left", "right_right")]
 z_index = 4096
 layout_mode = 3
 anchors_preset = 0
@@ -51,6 +51,21 @@ offset_bottom = -333.0
 scale = Vector2(2, 2)
 script = ExtResource("4_x5d2c")
 level = NodePath("../../../Level")
+player = NodePath("../..")
+left_name = NodePath("Panel/left object/Label")
+left_top = NodePath("Panel/left object/Label2")
+left_bottom = NodePath("Panel/left object/Label3")
+left_front = NodePath("Panel/left object/Label4")
+left_back = NodePath("Panel/left object/Label5")
+left_left = NodePath("Panel/left object/Label6")
+left_right = NodePath("Panel/left object/Label7")
+right_name = NodePath("Panel/Control/Label8")
+right_top = NodePath("Panel/Control/Label9")
+right_bottom = NodePath("Panel/Control/Label10")
+right_front = NodePath("Panel/Control/Label11")
+right_back = NodePath("Panel/Control/Label12")
+right_left = NodePath("Panel/Control/Label13")
+right_right = NodePath("Panel/Control/Label14")
 
 [node name="Label" type="Label" parent="Player/Camera2D/Control" unique_id=1026871604]
 layout_mode = 0
@@ -70,7 +85,6 @@ script = ExtResource("5_sjbvb")
 player = NodePath("../../..")
 
 [node name="Panel" type="Panel" parent="Player/Camera2D/Control" unique_id=1478181527]
-visible = false
 layout_mode = 0
 offset_left = 1.0
 offset_top = 119.0125

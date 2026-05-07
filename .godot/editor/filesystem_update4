@@ -1,4 +1,3 @@
 res://Scenes/Stages/debug_stage.tscn
 res://Scripts/debug_panel.gd
-res://Scripts/mouse_tracker.gd
-res://Scenes/polygon_test.tscn
+res://Scripts/Managers/LayerSorter.gd
