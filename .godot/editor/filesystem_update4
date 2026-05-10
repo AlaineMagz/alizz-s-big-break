@@ -1,3 +1,3 @@
 res://Scenes/Stages/debug_stage.tscn
 res://Scripts/debug_panel.gd
-res://Scripts/Managers/LayerSorter.gd
+res://Scripts/draw_outline.gd

@@ -22,17 +22,27 @@ var right_object : GameObject
 @export var right_left : Label
 @export var right_right : Label
 
+var is_hovering : bool = false
+var hovered_object : GameObject
+@export var hover_outline_color : Color = Color.YELLOW
+
+var is_selecting : bool = false
 var selected_object_1 : GameObject
 var selected_object_2 : GameObject
+@export var selected_outline_color : Color = Color.ORANGE_RED
 
 var list_of_hovered_objects : Array[GameObject]
 
 var mouse_in_window : bool = false
 var last_mouse_position : Vector2
+var refresh_outline : bool = false
 
 func _process(_delta: float) -> void:
 	
-	if mouse_in_window && (last_mouse_position != get_global_mouse_position()):
+	if (mouse_in_window && (last_mouse_position != get_global_mouse_position()) || refresh_outline):
+		
+		if refresh_outline:
+			refresh_outline = false
 		
 		list_of_hovered_objects.clear()
 		var level_objects : Array[Node] = level.geometry_list + level.entity_list
@@ -41,6 +51,16 @@ func _process(_delta: float) -> void:
 		for object in level_objects:
 			if is_object_under_mouse(object):
 				list_of_hovered_objects.append(object)
+		
+		if !list_of_hovered_objects.is_empty():
+			is_hovering = true
+			if selected_object_1 == null:
+				hovered_object = list_of_hovered_objects[0]
+			else:
+				hovered_object = list_of_hovered_objects[(list_of_hovered_objects.find(selected_object_1) + 1) % list_of_hovered_objects.size()]
+		else:
+			is_hovering = false
+			hovered_object = null
 		
 	
 	last_mouse_position = get_global_mouse_position()
@@ -61,6 +81,9 @@ func _input(event: InputEvent) -> void:
 			left_object = list_of_hovered_objects[0]
 			update_left_labels()
 		
+		selected_object_1 = left_object
+		refresh_outline = true
+		
 	
 	if event.is_action_pressed("mouse2"):
 		
@@ -74,6 +97,9 @@ func _input(event: InputEvent) -> void:
 		elif !list_of_hovered_objects.is_empty():
 			right_object = list_of_hovered_objects[0]
 			update_right_labels()
+		
+		selected_object_2 = right_object
+		refresh_outline = true
 		
 	
 	if event.is_action_pressed("interact"):
